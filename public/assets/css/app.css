@@ -10644,3 +10644,15 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #F1F2F7;
+}
+
+.bg-dark {
+  background-color: #1D2230;
+}
+
+.navbar-light .navbar-brand {
+  color: #c0c4d1;
+}
+

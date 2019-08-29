@@ -16,3 +16,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+/*
+ * List all movies for a user
+ */
+Route::get('movie/list', 'MovieController@list');
+
+/*
+ * Movie resource routes for CRUD operations
+ */
+Route::resource('movie', 'MovieController')->only([
+    'store', 'show', 'update', 'destroy'
+]);
+
