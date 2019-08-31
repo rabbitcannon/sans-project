@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
+use App\User;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -68,5 +69,10 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    public function list($id) {
+        $user = User::find($id);
+        return response()->json($user->movies);
     }
 }

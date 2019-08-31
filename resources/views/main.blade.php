@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" media="all">
 
         <!-- Stylesheets -->
         <link href="assets/css/app.css" rel="stylesheet" type="text/css">
@@ -37,11 +38,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -69,6 +65,7 @@
 
         @auth
             <div id="app"></div>
+            <input type="hidden" id="user_id" value="{{ Auth::user()->id }}"/>
         @else
             <div class="container">
                 <div class="row justify-content-center">
@@ -82,6 +79,7 @@
                 </div>
             </div>
         @endauth
+
 
         <!--Scripts-->
         <script src="assets/js/app.js"></script>

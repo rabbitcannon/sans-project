@@ -20,7 +20,7 @@ Auth::routes();
 /*
  * List all movies for a user
  */
-Route::get('movie/list', 'MovieController@list');
+Route::get('/movie/{id}/list', 'MovieController@list');
 
 /*
  * Movie resource routes for CRUD operations

@@ -2,10 +2,34 @@ body {
     background-color: #F1F2F7;
 }
 
+body, html {
+    font-family: "Poppings", sans-serif;
+}
+
+a {
+    color: #536BE1;
+}
+
 .bg-dark {
     background-color: #1D2230;
 }
 
 .navbar-light .navbar-brand {
+    color: #fff;
+
+    &:hover {
+        color: #c0c4d1;
+    }
+}
+
+.navbar-light .navbar-nav .nav-link {
     color: #c0c4d1;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.card {
+    background-color: #F2F2F2;
 }
