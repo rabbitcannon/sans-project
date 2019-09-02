@@ -5,7 +5,14 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
+@import "bootstrap/bootstrap";
+
+// animate.css
+@import "../../node_modules/animate.css/animate.min.css";
+
+// semantic ui css
+@import "../../node_modules/semantic-ui-css/semantic.min.css";
 
 // Overrides
 @import './overrides';

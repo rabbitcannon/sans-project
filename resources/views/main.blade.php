@@ -14,7 +14,7 @@
         <link href="assets/css/app.css" rel="stylesheet" type="text/css">
 
     </head>
-    <body>
+    <body class="animated fadeIn">
 
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
             <div class="container">
@@ -66,6 +66,7 @@
         @auth
             <div id="app"></div>
             <input type="hidden" id="user_id" value="{{ Auth::user()->id }}"/>
+            <script src="assets/js/app.js"></script>
         @else
             <div class="container">
                 <div class="row justify-content-center">
@@ -79,9 +80,5 @@
                 </div>
             </div>
         @endauth
-
-
-        <!--Scripts-->
-        <script src="assets/js/app.js"></script>
     </body>
 </html>

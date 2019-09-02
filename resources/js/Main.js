@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
-import { Header, Table, Rating } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
 import Axios from 'axios';
 
 import MovieItem from "./components/movies/MovieItem";
 import Loader from "./components/Loader";
+
+import AddMovie from "./components/movies/AddMovie";
 
 const userID = document.getElementById("user_id").value;
 
@@ -16,7 +18,7 @@ export default class Main extends Component {
 
         this.state = {
             isLoading: true,
-            movies: []
+            movies: null
         }
     }
 
@@ -36,19 +38,27 @@ export default class Main extends Component {
                 console.log(error);
             })
             .finally(() => {
-                // always executed
+                // console.log(this.state.movies)
             });
-
     }
+
+
 
     render() {
         return (
-            <div className="container">
+            <div className="container animated fadeIn">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
                             <div className="card-header">
-                                <FontAwesomeIcon icon={faFilm} /> My Movies
+                                <Header as='h3'>
+                                    <div className="float-left">
+                                        <FontAwesomeIcon icon={faFilm} /> My Movies
+                                    </div>
+                                    <div className="float-right">
+                                        <AddMovie/>
+                                    </div>
+                                </Header>
                             </div>
 
                             <div className="card-body">
@@ -66,8 +76,8 @@ export default class Main extends Component {
                                     <Table.Body>
                                         {!this.state.isLoading ? this.state.movies.map((movie) =>
                                             <MovieItem key={movie.id} movie={movie}/>
-                                        ) : <Table.Row colspan={5} className="text-center">
-                                                <Table.Cell width={16}>
+                                        ) : <Table.Row className="text-center">
+                                                <Table.Cell colSpan={5}>
                                                     <Loader loaderSize="43"/>
                                                 </Table.Cell>
                                             </Table.Row>

@@ -29,6 +29,8 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.22",
         "@fortawesome/free-solid-svg-icons": "^5.10.2",
         "@fortawesome/react-fontawesome": "^0.1.4",
+        "animate.css": "^3.7.2",
+        "semantic-ui-css": "^2.4.1",
         "semantic-ui-react": "^0.88.0"
     }
 }
