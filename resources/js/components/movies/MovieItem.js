@@ -10,7 +10,7 @@ class MovieItem extends Component {
 
     render() {
         const { movie } = this.props;
-console.log(typeof movie.year);
+
         return (
             <Table.Row className="text-center animated fadeIn">
                 <Table.Cell singleLine>

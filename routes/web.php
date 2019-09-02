@@ -23,6 +23,11 @@ Auth::routes();
 Route::get('/movie/{id}/list', 'MovieController@list');
 
 /*
+ * List movie formats
+ */
+Route::get('/movie/formats', 'MovieController@formats');
+
+/*
  * Movie resource routes for CRUD operations
  */
 Route::resource('movie', 'MovieController')->only([

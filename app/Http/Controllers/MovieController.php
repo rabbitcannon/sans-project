@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
+use App\MovieFormat;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,7 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -32,8 +32,7 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
-    {
+    public function show(Movie $movie) {
         //
     }
 
@@ -43,8 +42,7 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
-    {
+    public function edit(Movie $movie) {
         //
     }
 
@@ -55,8 +53,7 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
-    {
+    public function update(Request $request, Movie $movie) {
         //
     }
 
@@ -66,13 +63,24 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
-    {
+    public function destroy(Movie $movie) {
         //
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list($id) {
         $user = User::find($id);
         return response()->json($user->movies);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function formats() {
+        $formats = MovieFormat::all();
+        return response()->json($formats);
     }
 }

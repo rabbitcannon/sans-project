@@ -17,6 +17,13 @@ class Movie extends Model
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+
+    /**
      * @return string
      */
     public function getYearAttribute() {

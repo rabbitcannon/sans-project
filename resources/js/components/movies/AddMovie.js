@@ -1,28 +1,57 @@
-import React from "react";
+import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Header, Modal, Button, Icon } from 'semantic-ui-react';
+import { faPlus, faVideo, faSave } from '@fortawesome/free-solid-svg-icons';
+import { Header, Modal, Button } from 'semantic-ui-react';
 
-const AddMovieModal = () => (
-    <Modal className="animated fadeIn" centered trigger={<Button><FontAwesomeIcon icon={faPlus} />  Add Movie</Button>} closeIcon>
-        <Header icon='archive' content='Add a movie to your list!' />
-        <Modal.Content>
-            <p>
-                Your inbox is getting full, would you like us to enable automatic
-                archiving of old messages?
-            </p>
-        </Modal.Content>
-        <Modal.Actions>
-            <Button color='red'>
-                <Icon name='remove' /> No
-            </Button>
-            <Button color='green'>
-                <Icon name='checkmark' /> Yes
-            </Button>
-        </Modal.Actions>
-    </Modal>
-)
+import AddMovieForm from "./AddMovieForm";
+import Loader from "../Loader";
 
-// export default AddMovieModal
+class AddMovieModal extends Component {
+    constructor(props) {
+        super(props);
 
-export default () => (<div><AddMovieModal/></div>)
+        this.state = {
+            loading: false
+        }
+    }
+
+    toggleLoading = () => {
+        this.setState(prevState => ({
+            loading: !prevState.loading
+        }));
+
+        let submitButton = document.getElementById("add-movie-btn");
+        submitButton.innerHTML = "<img src='assets/images/loader_18.svg' />Saving...";
+        submitButton.disabled = true;
+    }
+
+    render() {
+        console.log(this.state);
+
+        return (
+            <Modal className="animated fadeIn" centered
+                   trigger={
+                       <Button color="blue">
+                           <FontAwesomeIcon icon={faPlus} />  Add Movie
+                       </Button>
+                   } closeIcon>
+                <Header>
+                    <FontAwesomeIcon icon={faVideo} /> Add a movie to your list!
+                </Header>
+                <Modal.Content>
+                    <AddMovieForm loading={this.state.loading} />
+                </Modal.Content>
+                <Modal.Actions>
+                    {/*<Button color='red' close>*/}
+                    {/*    <FontAwesomeIcon icon={faBan} /> Cancel*/}
+                    {/*</Button>*/}
+                    <Button id="add-movie-btn" type="submit" color='blue' onClick={this.toggleLoading}>
+                        <FontAwesomeIcon icon={faSave} /> Save
+                    </Button>
+                </Modal.Actions>
+            </Modal>
+        );
+    }
+}
+
+export default AddMovieModal;
