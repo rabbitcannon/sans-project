@@ -49,7 +49,7 @@ class MovieList extends Component {
                                         <FontAwesomeIcon icon={faFilm} /> My Movies
                                     </div>
                                     <div className="float-right">
-                                        <AddMovie />
+                                        <AddMovie getMovieList={this.getMovieList} />
                                     </div>
                                 </Header>
                             </div>

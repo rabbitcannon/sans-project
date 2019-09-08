@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faVideo, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { Header, Modal, Button } from 'semantic-ui-react';
 
 import AddMovieForm from "./AddMovieForm";
@@ -12,6 +12,7 @@ class AddMovieModal extends Component {
         this.state = {
             loading: false
         }
+
     }
 
     render() {
@@ -26,7 +27,7 @@ class AddMovieModal extends Component {
                     <FontAwesomeIcon icon={faVideo} /> Add a movie to your list!
                 </Header>
                 <Modal.Content>
-                    <AddMovieForm loading={this.state.loading} />
+                    <AddMovieForm loading={this.state.loading} getMovieList={this.props.getMovieList} />
                 </Modal.Content>
             </Modal>
         );

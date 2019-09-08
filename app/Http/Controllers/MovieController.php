@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Movie;
 use App\MovieFormat;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -23,12 +25,13 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Movie $movie) {
+        dd( Carbon::parse($request->input('year')));
         Movie::create([
-            'user_id' => $request->input('user_id'),
+            'user_id' => Auth::id(),
             'title' => $request->input('title'),
             'format' => $request->input('format'),
             'length' => $request->input('length'),
-            'year' => $request->input('year'),
+            'year' => Carbon::parse($request->input('year')),
             'rating' => $request->input('rating'),
         ]);
     }

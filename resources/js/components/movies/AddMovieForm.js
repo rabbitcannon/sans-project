@@ -44,6 +44,7 @@ class AddMovieForm extends Component {
             formatSelect: null,
             loading: false,
             rating: null,
+            modalView: true
         }
     }
 
@@ -115,12 +116,13 @@ class AddMovieForm extends Component {
                 rating: this.state.rating
             }).then(() => {
                 this.toggleFormLoading();
-                // this.props.getMovieList();
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
+                // this.setState(prevState => ({ modalView: !prevState.modalView }, console.log(this.state.modalView)));
+                this.setState({ modalView: false }, console.log(this.state.modalView));
                 this.props.getMovieList();
-            })
+            });
         }
     }
 
@@ -152,12 +154,18 @@ class AddMovieForm extends Component {
     // }
 
     render() {
+        const {
+            loading, modalView, errorTitle, errorFormat,
+            errorLength, errorYear, errorRating
+        } = this.state;
+        
+        console.log(new Date("2019"))
         return (
             <div>
-                <Form loading={this.state.loading}>
+                <Form loading={loading} open={modalView}>
                     <Form.Group widths='equal'>
                         <Form.Field
-                            error={this.state.errorTitle}
+                            error={errorTitle}
                             id='form-input-control-title'
                             control={Input}
                             label='Title'
@@ -166,7 +174,7 @@ class AddMovieForm extends Component {
                     </Form.Group>
                     <Form.Group widths='equal'>
                         <Form.Select
-                            error={this.state.errorFormat}
+                            error={errorFormat}
                             label='Format'
                             options={formatOptions}
                             placeholder='Format'
@@ -176,7 +184,7 @@ class AddMovieForm extends Component {
                     <Form.Group widths='equal'>
                         <Form.Field
                             id='form-input-control-length'
-                            error={this.state.errorLength}
+                            error={errorLength}
                             control={Input}
                             label='Length(in minutes)'
                             placeholder='Length'
@@ -184,7 +192,7 @@ class AddMovieForm extends Component {
                     </Form.Group>
                     <Form.Group widths='equal'>
                         <Form.Field
-                            error={this.state.errorYear}
+                            error={errorYear}
                             id='form-input-control-year'
                             control={Input}
                             label='Year'
@@ -197,7 +205,8 @@ class AddMovieForm extends Component {
                                 <b>Rating</b>
                                 <hr />
                                 <Rating icon='star' maxRating={5} onRate={this.handleRating} size='huge' />
-                                {(this.state.errorRating == true)
+                                {
+                                    (errorRating == true)
                                     ? <Message negative content='Please set an rating for your movie.' />
                                     : ""
                                 }
@@ -207,11 +216,9 @@ class AddMovieForm extends Component {
 
                     <Form.Group widths={'equal'}>
                         <Container textAlign='center'>
-                            <div>
-                                <Button id="add-movie-btn" type="submit" color='blue' onClick={this.submitAddMovieForm}>
-                                    <FontAwesomeIcon icon={faSave} /> Save
-                                </Button>
-                            </div>
+                            <Button id="add-movie-btn" type="submit" color='green' onClick={this.submitAddMovieForm}>
+                                <FontAwesomeIcon icon={faSave} /> Save
+                            </Button>
                         </Container>
                     </Form.Group>
                 </Form>

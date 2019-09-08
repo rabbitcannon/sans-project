@@ -10,6 +10,13 @@ class Movie extends Model
     /**
      * @var array
      */
+    protected $fillable = [
+        'user_id', 'title', 'format', 'length', 'year', 'rating'
+    ];
+
+    /**
+     * @var array
+     */
     protected $dates = [
         'year',
         'created_at',
@@ -23,6 +30,13 @@ class Movie extends Model
         return $this->hasOne('App\User');
     }
 
+    public function format() {
+        return $this->hasOne('App\MovieFormat');
+    }
+
+    public function getFormatAttribute() {
+        return $this->attributes['format'];
+    }
     /**
      * @return string
      */
