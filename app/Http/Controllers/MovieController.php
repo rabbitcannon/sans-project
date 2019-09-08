@@ -22,8 +22,15 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, Movie $movie) {
+        Movie::create([
+            'user_id' => $request->input('user_id'),
+            'title' => $request->input('title'),
+            'format' => $request->input('format'),
+            'length' => $request->input('length'),
+            'year' => $request->input('year'),
+            'rating' => $request->input('rating'),
+        ]);
     }
 
     /**
@@ -33,7 +40,7 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie) {
-        //
+        var_dump($movie);
     }
 
     /**

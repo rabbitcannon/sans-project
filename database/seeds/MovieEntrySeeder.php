@@ -13,12 +13,10 @@ class MovieEntrySeeder extends Seeder
      */
     public function run()
     {
-        $format = MovieFormat::all()->pluck('id');
-
         DB::table('movies')->insert([
             'user_id' => 1,
             'title' => 'Test Title',
-            'format' => $format,
+            'format' => 1,
             'length' => 120,
             'year' => '2019-09-01',
             'rating' => 4,

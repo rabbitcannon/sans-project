@@ -26,6 +26,7 @@ Route::get('/movie/{id}/list', 'MovieController@list');
  * List movie formats
  */
 Route::get('/movie/formats', 'MovieController@formats');
+Route::post('/movie', 'MovieController@store');
 
 /*
  * Movie resource routes for CRUD operations
