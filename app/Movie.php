@@ -29,19 +29,15 @@ class Movie extends Model
         return $this->hasOne('App\User');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function format() {
         return $this->hasOne('App\MovieFormat');
     }
 
-    public function getFormatAttribute() {
-        return $this->attributes['format'];
-    }
-
-    /**
-     * @return string
-     */
-    public function getYearAttribute() {
-        $parsed = Carbon::parse($this->attributes['year']);
-        return $parsed->format('Y');
+    public function getFormatAttribute($format) {
+        $formatQuery = MovieFormat::find($format);
+        return $formatQuery->format;
     }
 }

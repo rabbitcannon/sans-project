@@ -25,13 +25,12 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Movie $movie) {
-        dd(Carbon::parse($request->input('year'))->format('Y-m-d'));
         Movie::create([
             'user_id' => Auth::id(),
             'title' => $request->input('title'),
             'format' => $request->input('format'),
             'length' => $request->input('length'),
-            'year' => Carbon::parse($request->input('year'))->format('YYYY'),
+            'year' => $request->input('year'),
             'rating' => $request->input('rating'),
         ]);
     }
