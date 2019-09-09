@@ -25,7 +25,7 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Movie $movie) {
-        dd( Carbon::parse($request->input('year')));
+//        dd( Carbon::parse($request->input('year')));
         Movie::create([
             'user_id' => Auth::id(),
             'title' => $request->input('title'),

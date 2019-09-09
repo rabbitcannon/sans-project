@@ -44,7 +44,7 @@ class AddMovieForm extends Component {
             formatSelect: null,
             loading: false,
             rating: null,
-            modalView: true
+            modalView: false
         }
     }
 
@@ -64,7 +64,12 @@ class AddMovieForm extends Component {
         submitButton.disabled = true;
     }
 
-    submitAddMovieForm = () => {
+    submitAddMovieForm = (event) => {
+        event.preventDefault();
+        this.setState(prevState => ({ modalView: !prevState.modalView }, () => console.log(this.state.modalView)));
+        // this.setState({
+        //     modalView: false
+        // }, console.log(this.state.modalView));
         let user_id = document.getElementById("user_id").value;
         let title = document.getElementById("form-input-control-title").value;
         let format = this.state.formatSelect;
@@ -120,7 +125,6 @@ class AddMovieForm extends Component {
                 console.log(error);
             }).finally(() => {
                 // this.setState(prevState => ({ modalView: !prevState.modalView }, console.log(this.state.modalView)));
-                this.setState({ modalView: false }, console.log(this.state.modalView));
                 this.props.getMovieList();
             });
         }
@@ -158,8 +162,7 @@ class AddMovieForm extends Component {
             loading, modalView, errorTitle, errorFormat,
             errorLength, errorYear, errorRating
         } = this.state;
-        
-        console.log(new Date("2019"))
+
         return (
             <div>
                 <Form loading={loading} open={modalView}>
@@ -216,7 +219,7 @@ class AddMovieForm extends Component {
 
                     <Form.Group widths={'equal'}>
                         <Container textAlign='center'>
-                            <Button id="add-movie-btn" type="submit" color='green' onClick={this.submitAddMovieForm}>
+                            <Button id="add-movie-btn" type="submit" color='green' onClick={(event) => this.submitAddMovieForm(event)}>
                                 <FontAwesomeIcon icon={faSave} /> Save
                             </Button>
                         </Container>
