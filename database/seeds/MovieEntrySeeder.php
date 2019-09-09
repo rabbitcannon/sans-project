@@ -18,7 +18,7 @@ class MovieEntrySeeder extends Seeder
             'title' => 'Test Title',
             'format' => 1,
             'length' => 120,
-            'year' => '2019-09-01',
+            'year' => '2019',
             'rating' => 4,
             'created_at' => Carbon::now()
         ]);

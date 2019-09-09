@@ -44,7 +44,6 @@ class AddMovieForm extends Component {
             formatSelect: null,
             loading: false,
             rating: null,
-            modalView: false
         }
     }
 
@@ -64,12 +63,7 @@ class AddMovieForm extends Component {
         submitButton.disabled = true;
     }
 
-    submitAddMovieForm = (event) => {
-        event.preventDefault();
-        this.setState(prevState => ({ modalView: !prevState.modalView }, () => console.log(this.state.modalView)));
-        // this.setState({
-        //     modalView: false
-        // }, console.log(this.state.modalView));
+    submitAddMovieForm = () => {
         let user_id = document.getElementById("user_id").value;
         let title = document.getElementById("form-input-control-title").value;
         let format = this.state.formatSelect;
@@ -124,8 +118,11 @@ class AddMovieForm extends Component {
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
-                // this.setState(prevState => ({ modalView: !prevState.modalView }, console.log(this.state.modalView)));
                 this.props.getMovieList();
+
+                setTimeout(() => {
+                    this.props.toggleModal();
+                }, 1000);
             });
         }
     }
@@ -159,13 +156,13 @@ class AddMovieForm extends Component {
 
     render() {
         const {
-            loading, modalView, errorTitle, errorFormat,
+            loading, errorTitle, errorFormat,
             errorLength, errorYear, errorRating
         } = this.state;
 
         return (
             <div>
-                <Form loading={loading} open={modalView}>
+                <Form loading={loading}>
                     <Form.Group widths='equal'>
                         <Form.Field
                             error={errorTitle}
@@ -219,7 +216,7 @@ class AddMovieForm extends Component {
 
                     <Form.Group widths={'equal'}>
                         <Container textAlign='center'>
-                            <Button id="add-movie-btn" type="submit" color='green' onClick={(event) => this.submitAddMovieForm(event)}>
+                            <Button id="add-movie-btn" type="submit" color='green' onClick={this.submitAddMovieForm}>
                                 <FontAwesomeIcon icon={faSave} /> Save
                             </Button>
                         </Container>

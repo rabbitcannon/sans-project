@@ -19,7 +19,7 @@ class CreateMovieTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('format');
             $table->unsignedInteger('length');
-            $table->date('year');
+            $table->string('year');
             $table->unsignedSmallInteger('rating');
             $table->timestamps();
         });

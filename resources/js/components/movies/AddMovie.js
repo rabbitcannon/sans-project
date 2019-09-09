@@ -10,16 +10,21 @@ class AddMovieModal extends Component {
         super(props);
 
         this.state = {
-            loading: false
+            loading: false,
+            showModal: false
         }
+    }
 
+    toggleModal = () => {
+        this.setState(prevState => ({ showModal: !prevState.showModal }));
     }
 
     render() {
         return (
             <Modal className="animated fadeIn" size={'tiny'} centered
+                   open={this.state.showModal}
                    trigger={
-                       <Button color="blue">
+                       <Button color="blue" onClick={this.toggleModal}>
                            <FontAwesomeIcon icon={faPlus} />  Add Movie
                        </Button>
                    } closeIcon>
@@ -27,7 +32,9 @@ class AddMovieModal extends Component {
                     <FontAwesomeIcon icon={faVideo} /> Add a movie to your list!
                 </Header>
                 <Modal.Content>
-                    <AddMovieForm loading={this.state.loading} getMovieList={this.props.getMovieList} />
+                    <AddMovieForm toggleModal={this.toggleModal}
+                                  loading={this.state.loading}
+                                  getMovieList={this.props.getMovieList} />
                 </Modal.Content>
             </Modal>
         );

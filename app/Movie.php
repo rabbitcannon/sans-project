@@ -18,7 +18,6 @@ class Movie extends Model
      * @var array
      */
     protected $dates = [
-        'year',
         'created_at',
         'updated_at'
     ];
@@ -37,6 +36,7 @@ class Movie extends Model
     public function getFormatAttribute() {
         return $this->attributes['format'];
     }
+
     /**
      * @return string
      */
