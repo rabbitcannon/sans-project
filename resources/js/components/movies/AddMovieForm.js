@@ -5,12 +5,16 @@ import {
 import Axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import Toastr from "toastr";
 
 const formatOptions = [
     {key: '1', text: 'VHS', value: 1},
     {key: '2', text: 'Blu-Ray', value: 2},
     {key: '3', text: 'Streaming', value: 3},
 ];
+
+Toastr.options.newestOnTop = true;
+Toastr.options.showMethod = 'slideDown';
 
 
 Axios.get('/movie/formats')
@@ -122,6 +126,7 @@ class AddMovieForm extends Component {
 
                 setTimeout(() => {
                     this.props.toggleModal();
+                    Toastr.success('Movie added!');
                 }, 1000);
             });
         }

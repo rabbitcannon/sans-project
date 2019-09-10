@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {Header, Table, Rating, Input, Form, Button} from 'semantic-ui-react';
+import {Header, Table, Rating, Input, Form, Dropdown, Confirm} from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStopwatch, faEdit, faTrashAlt, faSave, faBan } from '@fortawesome/free-solid-svg-icons';
+import Toastr from "toastr";
 
 const formatOptions = [
     {key: '1', text: 'VHS', value: 1},
@@ -23,20 +24,36 @@ class MovieItem extends Component {
             formats: [],
             formatSelect: null,
             rating: null,
+            confirmState: false
         }
     }
 
+    componentDidMount = () => {
+        Toastr.options.newestOnTop = true;
+        Toastr.options.showMethod = 'slideDown';
+    }
+
+    handleCancel = () => this.setState({ confirmState: false })
+    handleOpen = () => this.setState({ confirmState: true })
+
     toggleEditMode = () => {
-        this.setState(prevState => ({ editMode: !this.state.editMode }));
+        this.setState({ editMode: !this.state.editMode });
     }
 
     handleRating = (event, { rating, maxRating }) => {
         this.setState({ rating, maxRating });
     }
 
+    deleteMovie = () => {
+        this.setState({ confirmState: false });
+        Toastr.success('Your movie deleted!');
+    }
+
     render() {
         const { movie } = this.props;
         const { editMode, errorTitle, errorFormat, errorLength, errorYear } = this.state;
+
+        let deleteMessage = `Are you sure you wiah to delete: ${movie.title}?`
 
         return (
             <Table.Row className="text-center animated fadeIn">
@@ -52,8 +69,14 @@ class MovieItem extends Component {
                 <Table.Cell singleLine>
                     {editMode === false
                     ? movie.format
-                    : <Form.Select size='mini' error={errorFormat} options={formatOptions}
-                            onChange={(event, { value }) => this.setState({formatSelect: value})} />
+                    : <Dropdown
+                        placeholder='Format'
+                        selection
+                        options={formatOptions}
+                        defaultValue={movie.format}
+                        />
+                        // <Form.Select size='mini' error={errorFormat} options={formatOptions}
+                        //     onChange={(event, { value }) => this.setState({formatSelect: value})} />
                     }
                 </Table.Cell>
                 <Table.Cell singleLine>
@@ -82,9 +105,23 @@ class MovieItem extends Component {
                         <FontAwesomeIcon icon={faEdit} size='lg' />
                     </a>
                     &nbsp;&nbsp;
-                    <a href="#">
+                    <a href="#" onClick={this.handleOpen}>
                         <FontAwesomeIcon icon={faTrashAlt} size='lg' />
                     </a>
+
+                    <Confirm
+                        size='mini'
+                        open={this.state.confirmState}
+                        onCancel={this.handleCancel}
+                        onConfirm={this.deleteMovie}
+                        content={deleteMessage}
+                    />
+
+                    {/*header='This is a large confirm'*/}
+                    {/*open={this.state.open}*/}
+                    {/*onCancel={this.handleCancel}*/}
+                    {/*onConfirm={this.handleConfirm}*/}
+                    {/*size='large'*/}
                 </Table.Cell>
             </Table.Row>
         );
