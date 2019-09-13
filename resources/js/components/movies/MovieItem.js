@@ -45,9 +45,8 @@ class MovieItem extends Component {
         this.setState({ rating, maxRating });
     }
 
-    deleteMovie = () => {
-        this.setState({ confirmState: false });
-        Toastr.success('Your movie deleted!');
+    deleteMovie = (id) => {
+        this.setState({ confirmState: false }, this.props.deleteMovie(id));
     }
 
     render() {
@@ -114,7 +113,7 @@ class MovieItem extends Component {
                         size='mini'
                         open={this.state.confirmState}
                         onCancel={this.handleCancel}
-                        onConfirm={this.deleteMovie}
+                        onConfirm={() => this.deleteMovie(movie.id)}
                         content={deleteMessage}
                     />
 

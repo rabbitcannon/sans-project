@@ -46,16 +46,6 @@ class MovieController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Movie $movie) {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,14 +56,12 @@ class MovieController extends Controller
         //
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Movie  $movie
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
-    public function destroy(Movie $movie) {
-        //
+    public function destroy($id) {
+        Movie::find($id)->delete();
     }
 
     /**

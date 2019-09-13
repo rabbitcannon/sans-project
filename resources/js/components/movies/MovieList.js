@@ -6,6 +6,7 @@ import AddMovie from "./AddMovie";
 import MovieItem from "./MovieItem";
 import Loader from "../Loader";
 import Axios from "axios";
+import Toastr from "toastr";
 
 const userID = document.getElementById("user_id").value;
 
@@ -36,11 +37,23 @@ class MovieList extends Component {
         });
     }
 
+    deleteMovie = (id) => {
+        Axios.delete(`/movie/${id}`)
+            .then(() => {
+                this.setState({
+                    isLoading: false,
+                },() => this.getMovieList(this.state.sortState));
+                Toastr.success('Your movie deleted!')
+            }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     handleSort = (sort) => {
         this.setState({
             sortState: sort,
             isLoading: true,
-        }, this.getMovieList(this.state.sortState));
+        }, () => this.getMovieList(this.state.sortState));
     }
 
     render() {
@@ -87,7 +100,7 @@ class MovieList extends Component {
 
                                     <Table.Body>
                                         {!isLoading ? movies.map((movie) =>
-                                            <MovieItem key={movie.id} movie={movie} />
+                                            <MovieItem key={movie.id} movie={movie} deleteMovie={this.deleteMovie} />
                                         ) :
                                             <Table.Row className="text-center">
                                                 <Table.Cell colSpan={6}>
