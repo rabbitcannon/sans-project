@@ -15,7 +15,8 @@ class MovieList extends Component {
 
         this.state = {
             isLoading: true,
-            movies: null
+            movies: null,
+            sortState: "all"
         }
     }
 
@@ -24,7 +25,7 @@ class MovieList extends Component {
     }
 
     getMovieList = () => {
-        Axios.get(`/movie/${userID}/list`)
+        Axios.get(`/movie/${userID}/list/${this.state.sortState}`)
             .then((response) => {
                 this.setState({
                     isLoading: false,
@@ -33,6 +34,13 @@ class MovieList extends Component {
             }).catch((error) => {
             console.log(error);
         });
+    }
+
+    handleSort = (sort) => {
+        this.setState({
+            sortState: sort,
+            isLoading: true,
+        }, this.getMovieList(this.state.sortState));
     }
 
     render() {
@@ -58,11 +66,21 @@ class MovieList extends Component {
                                 <Table celled padded>
                                     <Table.Header>
                                         <Table.Row className="text-center">
-                                            <Table.HeaderCell>Title</Table.HeaderCell>
-                                            <Table.HeaderCell>Format</Table.HeaderCell>
-                                            <Table.HeaderCell>Length</Table.HeaderCell>
-                                            <Table.HeaderCell>Year</Table.HeaderCell>
-                                            <Table.HeaderCell>Rating</Table.HeaderCell>
+                                            <Table.HeaderCell>
+                                                <a href="#" onClick={() => this.handleSort('Title')}>Title</a>
+                                            </Table.HeaderCell>
+                                            <Table.HeaderCell>
+                                                <a href="#" onClick={() => this.handleSort('Format')}>Format</a>
+                                            </Table.HeaderCell>
+                                            <Table.HeaderCell>
+                                                <a href="#" onClick={() => this.handleSort('Length')}>Length</a>
+                                            </Table.HeaderCell>
+                                            <Table.HeaderCell>
+                                                <a href="#" onClick={() => this.handleSort('Year')}>Year</a>
+                                            </Table.HeaderCell>
+                                            <Table.HeaderCell>
+                                                <a href="#" onClick={() => this.handleSort('Rating')}>Rating</a>
+                                            </Table.HeaderCell>
                                             <Table.HeaderCell>Modify</Table.HeaderCell>
                                         </Table.Row>
                                     </Table.Header>

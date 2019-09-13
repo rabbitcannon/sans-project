@@ -24,13 +24,14 @@ class MovieItem extends Component {
             formats: [],
             formatSelect: null,
             rating: null,
-            confirmState: false
+            confirmState: false,
         }
     }
 
     componentDidMount = () => {
         Toastr.options.newestOnTop = true;
-        Toastr.options.showMethod = 'slideDown';
+        Toastr.options.showMethod = "slideDown";
+        Toastr.options.positionClass = "toast-bottom-right";
     }
 
     handleCancel = () => this.setState({ confirmState: false })

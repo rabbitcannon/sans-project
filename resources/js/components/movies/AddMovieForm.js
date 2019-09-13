@@ -13,10 +13,6 @@ const formatOptions = [
     {key: '3', text: 'Streaming', value: 3},
 ];
 
-Toastr.options.newestOnTop = true;
-Toastr.options.showMethod = 'slideDown';
-
-
 Axios.get('/movie/formats')
     .then((response) => {
 
@@ -53,6 +49,10 @@ class AddMovieForm extends Component {
 
     componentDidUpdate = () => {
         // this.getMovieFormats();
+        Toastr.options.newestOnTop = true;
+        Toastr.options.showMethod = 'slideDown';
+        Toastr.options.positionClass = "toast-bottom-right";
+
     }
 
     handleRating = (event, { rating, maxRating }) => {

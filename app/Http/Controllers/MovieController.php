@@ -80,9 +80,14 @@ class MovieController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function list($id) {
-        $user = User::find($id);
-        return response()->json($user->movies);
+    public function list($id, $sort = 'all') {
+        if($sort === "all"){
+            $user = Movie::where('user_id', $id)->get();
+        }
+        else {
+            $user = Movie::where('user_id', $id)->orderBy($sort)->get();
+        }
+        return response()->json($user);
     }
 
     /**

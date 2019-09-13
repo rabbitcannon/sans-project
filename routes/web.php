@@ -20,7 +20,7 @@ Auth::routes();
 /*
  * List all movies for a user
  */
-Route::get('/movie/{id}/list', 'MovieController@list');
+Route::get('/movie/{id}/list/{sort?}', 'MovieController@list');
 
 /*
  * List movie formats
